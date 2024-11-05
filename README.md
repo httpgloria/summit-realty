@@ -7,7 +7,7 @@ A full-stack real estate finder application that allows users to search for prop
 ### Key Features:
 - **User Authentication**: Secure user authentication and authorization using JSON Web Tokens (JWT) for account management and session persistence.
 - **Real-Time Chat**: Real-time messaging functionality implemented with Socket.io, allowing users to communicate instantly within property posts.
-- **Property Search and Routing**: Advanced property search with dynamic filtering and navigation through property listings, powered by React Router for smooth routing.
+- **Property Search and Routing**: Property search with filtering capabilities and navigation through property listings.
 - **Interactive Map**: Integration of the Leaflet library to display properties on an interactive map, providing geographic context to users.
 - **Optimized UI**: Utilized React Suspense to optimize UI component loading, improving performance and ensuring a smooth user experience.
 - **Real-Time Notifications**: Managed live chat notifications using Zustand for a responsive and engaging interface.
