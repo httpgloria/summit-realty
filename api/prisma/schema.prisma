@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id         Int         @id @default(autoincrement())
+  title      String
+  price      Int
+  images     Image[]     @relation("Original Post of image")
+  address    String
+  city       String
+  bedroom    Int
+  bathroom   Int
+  latitude   String
+  longitude  String
+  type       Type
+  property   Property
+  createdAt  DateTime    @default(now())
+  user       User        @relation(fields: [userId], references: [id])
+  userId     Int
+  postDetail PostDetail? @relation("Original Post of details")
+  savedPost  SavedPost?  @relation("Saved Post")
+}
+
+enum Type {
+  buy
+  rent
+}
+
+enum Property {
+  apartment
+  house
+  condo
+  land
+}
+
+model PostDetail {
+  id         Int     @id @default(autoincrement())
+  desc       String
+  utilities  String?
+  pet        String?
+  income     String?
+  size       Int?
+  school     Int?
+  bus        Int?
+  restaurant Int?
+  postId     Int     @unique
+  post       Post    @relation("Original Post of details", fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Image {
+  id     Int    @id @default(autoincrement())
+  post   Post   @relation("Original Post of image", fields: [postId], references: [id], onDelete: Cascade)
+  postId Int
+  url    String
+}
+
+model SavedPost {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  post   Post @relation("Saved Post", fields: [postId], references: [id], onDelete: Cascade)
+  postId Int  @unique
+
+  @@unique([userId, postId])
+}
+
+model User {
+  id         Int         @id @default(autoincrement())
+  email      String      @unique
+  username   String      @unique
+  password   String
+  avatar     String?
+  createdAt  DateTime    @default(now())
+  posts      Post[]
+  savedPosts SavedPost[]
+  chats      Chat[]      @relation("ChatUsers")
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  username String @unique
+  password String
+}
+
+model Chat {
+  id          Int       @id @default(autoincrement())
+  users       User[]    @relation("ChatUsers")
+  userIDs     Json
+  seenBy      Json?
+  createdAt   DateTime  @default(now())
+  messages    Message[]
+  lastMessage String?
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  text      String
+  userId    Int
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    Int
+  createdAt DateTime @default(now())
+}
