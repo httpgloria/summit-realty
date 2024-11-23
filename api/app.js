@@ -7,6 +7,7 @@ import testRoute from "./routes/test.route.js";
 import userRoute from "./routes/user.route.js";
 import chatRoute from "./routes/chat.route.js";
 import messageRoute from "./routes/message.route.js";
+import inquiryRoute from "./routes/inquiry.route.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/api/test", testRoute);
 app.use("/api/users", userRoute);
 app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
+app.use("/api/inquiries", inquiryRoute);
 
 app.listen(8800, () => {
   console.log("Server is running...");

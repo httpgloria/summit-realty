@@ -37,6 +37,14 @@ export const login = async (req, res) => {
       where: { username: username },
     });
 
+    if (user.isBanned) {
+      return res
+        .status(401)
+        .json({
+          message: "Your account has been banned for violating the guidelines.",
+        });
+    }
+
     if (!user) return res.status(401).json({ message: "Invalid credentials." });
 
     //Check if password is correct

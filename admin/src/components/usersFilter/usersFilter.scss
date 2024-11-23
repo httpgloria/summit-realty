@@ -1,0 +1,8 @@
+.users-search {
+  flex-direction: row;
+
+  & .form-field.search {
+    flex: 1;
+    justify-content: flex-start;
+  }
+}

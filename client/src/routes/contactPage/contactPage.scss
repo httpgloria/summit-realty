@@ -1,0 +1,51 @@
+.formContainer {
+  flex: 3;
+  //   overflow: scroll;
+
+  .wrapper {
+    margin: 30px 50px 100px 0px;
+
+    form {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      .item {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        textarea {
+          padding: 20px;
+          font-family: "Lato", sans-serif;
+        }
+
+        input {
+          padding: 20px;
+          border-radius: 5px;
+          border: 1px solid gray;
+        }
+
+        select {
+          padding: 19px;
+        }
+
+        &.description {
+          width: 100%;
+        }
+      }
+      .sendButton {
+        padding: 20px 50px;
+        border-radius: 5px;
+        border: none;
+        background-color: #2f2e28;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

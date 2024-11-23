@@ -6,7 +6,6 @@ dotenv.config();
 
 export const getPosts = async (req, res) => {
   const query = req.query;
-  console.log(query);
   try {
     const whereClause = {};
 
@@ -14,7 +13,38 @@ export const getPosts = async (req, res) => {
       whereClause.city = query.city;
     }
 
-    console.log(whereClause);
+    const posts = await prisma.post.findMany({
+      where: {
+        ...whereClause,
+        type: query.type || undefined,
+        property: query.property || undefined,
+        bedroom: parseInt(query.bedroom) || undefined,
+        title: query.title ? { contains: query.title } : undefined,
+        price: {
+          gte: parseInt(query.minPrice) || 0,
+          lte: parseInt(query.maxPrice) || 10000000,
+        },
+        isFlagged: false,
+      },
+      include: {
+        images: true,
+      },
+    });
+    res.status(200).json(posts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Failed to get posts" });
+  }
+};
+
+export const getPostsAdmin = async (req, res) => {
+  const query = req.query;
+  try {
+    const whereClause = {};
+
+    if (query.city !== "undefined") {
+      whereClause.city = query.city;
+    }
 
     const posts = await prisma.post.findMany({
       where: {
@@ -22,6 +52,7 @@ export const getPosts = async (req, res) => {
         type: query.type || undefined,
         property: query.property || undefined,
         bedroom: parseInt(query.bedroom) || undefined,
+        title: query.title ? { contains: query.title } : undefined,
         price: {
           gte: parseInt(query.minPrice) || 0,
           lte: parseInt(query.maxPrice) || 10000000,
@@ -143,9 +174,13 @@ export const updatePost = async (req, res) => {
   let tokenUserId = req.userId;
   const body = req.body;
 
+  console.log(req.body);
+
   const imagesWithPostId = body.images.map((image) => ({
-    ...image,
+    url: image.url,
   }));
+
+  console.log(imagesWithPostId);
 
   try {
     const post = await prisma.post.findUnique({

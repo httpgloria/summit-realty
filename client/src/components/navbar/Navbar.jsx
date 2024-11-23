@@ -17,13 +17,12 @@ function Navbar() {
   return (
     <nav>
       <div className="left">
-        <a href="/" className="logo">
+        <Link to="/" className="logo">
           <img src="/logo.png" alt="" />
-        </a>
-        <a href="/">Home</a>
+        </Link>
+        <Link to="/">Home</Link>
         <a href="/">About</a>
-        <a href="/">Contact</a>
-        <a href="/">Agents</a>
+        <Link to="/contact">Contact Us</Link>
       </div>
       <div className="right">
         {currentUser ? (
@@ -37,10 +36,10 @@ function Navbar() {
           </div>
         ) : (
           <>
-            <a href="/login">Sign in</a>
-            <a href="/register" className="register-btn">
+            <Link to="/login">Sign in</Link>
+            <Link to="/register" className="register-btn">
               Sign up
-            </a>
+            </Link>
           </>
         )}
         <div className="menuIcon">
@@ -51,12 +50,13 @@ function Navbar() {
           />
         </div>
         <div className={open ? "menu active" : "menu"}>
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
           <a href="/">About</a>
-          <a href="/">Contact</a>
-          <a href="/">Agents</a>
-          <a href="/">Sign in</a>
-          <a href="/">Sign up</a>
+          <Link to="/contact">Contact Us</Link>
+          <Link to="/login">Sign in</Link>
+          <Link to="/register" className="register-btn">
+            Sign up
+          </Link>
         </div>
       </div>
     </nav>

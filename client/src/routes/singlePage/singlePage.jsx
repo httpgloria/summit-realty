@@ -225,7 +225,7 @@ function SinglePage() {
             <Map items={[post]} />
           </div>
           <div className="buttons">
-            {currentUser.id !== post.userId && (
+            {currentUser && currentUser.id !== post.userId && (
               <button onClick={handleSend}>
                 <img src="/chat.png" alt="" />
                 Send a Message

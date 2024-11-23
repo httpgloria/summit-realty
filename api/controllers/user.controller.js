@@ -2,8 +2,11 @@ import prisma from "../lib/prisma.js";
 import bcrypt from "bcrypt";
 
 export const getUsers = async (req, res) => {
+  const query = req.query;
   try {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      where: { username: query.username || undefined },
+    });
     res.status(200).json(users);
   } catch (err) {
     console.log(err);
@@ -28,9 +31,12 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   const id = parseInt(req.params.id);
   const tokenUserId = req.userId;
+  const isAdmin = req.isAdmin;
   const { password, avatar, ...inputs } = req.body;
 
-  if (id !== tokenUserId) {
+  // console.log(isAdmin);
+
+  if (id !== tokenUserId && !isAdmin) {
     return res.status(403).json({ message: "Not authorized." });
   }
 

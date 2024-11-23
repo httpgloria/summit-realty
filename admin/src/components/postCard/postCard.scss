@@ -1,0 +1,61 @@
+.postCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 15px 20px;
+  border-radius: 12px;
+
+  &-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__text {
+      text-transform: capitalize;
+      font-weight: 500;
+      color: #818181;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    gap: 10px;
+
+    & button {
+      background: #2f2e28;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.5s ease;
+
+      &:hover {
+        background-color: #1f1e1b;
+      }
+    }
+
+    & &__flag {
+      background: rgb(231, 189, 65);
+
+      &:hover {
+        background: rgb(197, 149, 18);
+      }
+    }
+
+    & &__flag-outline {
+      background-color: #fff;
+      border: rgb(231, 189, 65) 2px solid;
+      color: rgb(231, 189, 65);
+    }
+
+    & &__delete {
+      background: rgb(231, 76, 65);
+
+      &:hover {
+        background: rgb(194, 62, 53);
+      }
+    }
+  }
+}

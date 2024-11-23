@@ -15,6 +15,7 @@ datasource db {
 
 model Post {
   id         Int         @id @default(autoincrement())
+  isFlagged  Boolean     @default(false)
   title      String
   price      Int
   images     Image[]     @relation("Original Post of image")
@@ -86,6 +87,7 @@ model User {
   posts      Post[]
   savedPosts SavedPost[]
   chats      Chat[]      @relation("ChatUsers")
+  isBanned   Boolean     @default(false)
 }
 
 model Admin {
@@ -112,4 +114,15 @@ model Message {
   chat      Chat     @relation(fields: [chatId], references: [id])
   chatId    Int
   createdAt DateTime @default(now())
+}
+
+model Inquiry {
+  id        Int      @id @default(autoincrement())
+  username  String
+  firstName String
+  lastName  String
+  message   String
+  subject   String
+  seen      Boolean  @default(false)
+  sentAt    DateTime @default(now())
 }
