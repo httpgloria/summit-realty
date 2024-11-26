@@ -47,6 +47,9 @@ export const getPostsAdmin = async (req, res) => {
     }
 
     const posts = await prisma.post.findMany({
+      orderBy: {
+        createdAt: query.date == "oldest" ? "asc" : "desc",
+      },
       where: {
         ...whereClause,
         type: query.type || undefined,

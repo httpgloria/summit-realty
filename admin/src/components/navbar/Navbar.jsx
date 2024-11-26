@@ -125,7 +125,7 @@ function Navbar() {
             <Link
               to="/messages"
               className={
-                location.pathname == "/messages"
+                location.pathname.includes("/messages")
                   ? "nav-link nav-link-active"
                   : "nav-link"
               }

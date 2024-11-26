@@ -1,0 +1,19 @@
+.message {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid #6d6d6d;
+    border-radius: 22px;
+    padding: 20px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  &__detail {
+    font-size: 18px;
+    color: #6d6d6d;
+  }
+}

@@ -5,6 +5,9 @@ export const getUsers = async (req, res) => {
   const query = req.query;
   try {
     const users = await prisma.user.findMany({
+      orderBy: {
+        createdAt: query.date == "oldest" ? "asc" : "desc",
+      },
       where: { username: query.username || undefined },
     });
     res.status(200).json(users);

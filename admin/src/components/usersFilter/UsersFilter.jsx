@@ -6,6 +6,7 @@ function UsersFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState({
     username: searchParams.get("username") || "",
+    date: searchParams.get("date") || "latest",
   });
 
   const handleChange = (e) => {

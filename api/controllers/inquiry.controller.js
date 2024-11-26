@@ -18,7 +18,7 @@ export const getInquiries = async (req, res) => {
             : undefined,
       },
       orderBy: {
-        sentAt: query.date == "latest" ? "asc" : "desc",
+        sentAt: query.date == "oldest" ? "asc" : "desc",
       },
     });
 
