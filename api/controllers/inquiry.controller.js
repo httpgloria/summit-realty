@@ -10,6 +10,12 @@ export const getInquiries = async (req, res) => {
     const inquiries = await prisma.inquiry.findMany({
       where: {
         subject: query.inquiry || undefined,
+        seen:
+          query.seen === "true"
+            ? true
+            : query.seen === "false"
+            ? false
+            : undefined,
       },
       orderBy: {
         sentAt: query.date == "latest" ? "asc" : "desc",
@@ -54,5 +60,22 @@ export const sendInquiry = async (req, res) => {
     res.status(201).json(newInquiry);
   } catch (error) {
     res.status(500).json({ message: "Failed to send inquiry." });
+  }
+};
+
+export const updateInquiry = async (req, res) => {
+  const body = req.body;
+  let inquiryId = parseInt(req.params.id);
+  try {
+    const updatedInquiry = await prisma.inquiry.update({
+      where: { id: inquiryId },
+      data: {
+        seen: body.seen,
+      },
+    });
+
+    res.status(200).json(updatedInquiry);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update inquiry." });
   }
 };

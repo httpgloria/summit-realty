@@ -97,6 +97,24 @@
   display: none;
 }
 
+.nav-item {
+  position: relative;
+}
+
+.notif-bubble {
+  background-color: #e04949;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
 @media (max-width: 1024px) {
   .sidebar {
     height: 56px;

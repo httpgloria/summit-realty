@@ -12,6 +12,7 @@ import {
 import "./navbar.scss";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useLocation } from "react-router-dom";
+import { useMessageStore } from "../../lib/messageStore";
 
 function Navbar() {
   const { currentUser } = useContext(AuthContext);
@@ -20,6 +21,16 @@ function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const sideBar = useRef(null);
   const location = useLocation();
+  const fetch = useMessageStore((state) => state.fetch);
+  const number = useMessageStore((state) => state.number);
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  useEffect(() => {
+    console.log("Number state:", number);
+  }, [number]);
 
   // console.log(location.pathname);
 
@@ -119,6 +130,7 @@ function Navbar() {
                   : "nav-link"
               }
             >
+              {number > 0 && <span className="notif-bubble">{number}</span>}
               <span>
                 <RiChat4Line />
               </span>
