@@ -4,6 +4,12 @@
 
 A full-stack real estate finder application that allows users to search for properties, view detailed listings, and engage in real-time chat with property owners or agents.
 
+### New Admin Dashboard
+Newly incorported an admin dashboard that admins with the admin username and password can access. 
+- **Post Moderation**: Posts interface where any innapropriate or invalid posts can be flagged or deleted permanently
+- **User Moderation**: The ability to ban users for violating certain guidelines/rules
+- **Inquiry Messages**: Users from the client website can submit inquiries and messages for the admins to view on the admin panel
+
 ### Key Features:
 - **User Authentication**: Secure user authentication and authorization using JSON Web Tokens (JWT) for account management and session persistence.
 - **Real-Time Chat**: Real-time messaging functionality implemented with Socket.io, allowing users to communicate instantly within property posts.
