@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import "./posts.scss";
 import PostCard from "../../components/postCard/PostCard";
 import PostsFilter from "../../components/postsFilter/PostsFilter";
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, Link, useLoaderData } from "react-router-dom";
 import Modal from "../../components/modal/Modal";
 import apiRequest from "../../lib/apiRequest";
 
@@ -52,6 +52,9 @@ function Posts() {
       )}
       <p>({posts.length}) Results</p>
       <div className="posts-layout">
+        <Link to={`http://localhost:5174/profile`} className="btn-primary">
+          Create A Post
+        </Link>
         <Suspense fallback={<p>Loading...</p>}>
           <Await
             resolve={data.postResponse}

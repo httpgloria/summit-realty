@@ -32,7 +32,7 @@ function Login() {
 
       updateUser(res.data);
 
-      navigate("/posts");
+      navigate("/");
     } catch (error) {
       setError(error.response.data.message);
     } finally {
